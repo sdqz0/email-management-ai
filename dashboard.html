@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Management AI Agent - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Email AI</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#" data-section="overview">Overview</a></li>
+                    <li><a href="#" data-section="emails">Emails</a></li>
+                    <li><a href="#" data-section="calendar">Calendar</a></li>
+                    <li><a href="#" data-section="settings">Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="fetch-emails" class="button primary">Refresh Emails</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search emails...">
+                    <button><i class="icon-search"></i></button>
+                </div>
+                <div class="user-menu">
+                    <span id="last-updated">Last updated: Never</span>
+                    <button id="generate-digest" class="button secondary">Generate Digest</button>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active">
+                    <h2>Email Overview</h2>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <h3>Unread Emails</h3>
+                            <p id="unread-count">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>High Priority</h3>
+                            <p id="high-priority-count">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Calendar Events</h3>
+                            <p id="calendar-events-count">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Action Items</h3>
+                            <p id="action-items-count">0</p>
+                        </div>
+                    </div>
+
+                    <div class="digest-preview">
+                        <h3>Latest Digest</h3>
+                        <div id="digest-container">
+                            <p class="empty-state">No digest generated yet. Click "Generate Digest" to create one.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Emails Section -->
+                <section id="emails" class="content-section">
+                    <h2>Email Inbox</h2>
+                    <div class="filter-bar">
+                        <div class="filter-group">
+                            <label>Priority:</label>
+                            <select id="priority-filter">
+                                <option value="all">All</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Category:</label>
+                            <select id="category-filter">
+                                <option value="all">All</option>
+                                <option value="primary">Primary</option>
+                                <option value="social">Social</option>
+                                <option value="promotions">Promotions</option>
+                                <option value="updates">Updates</option>
+                                <option value="forums">Forums</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Show:</label>
+                            <select id="read-filter">
+                                <option value="all">All</option>
+                                <option value="unread">Unread</option>
+                                <option value="read">Read</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="email-list">
+                        <div id="email-list-container">
+                            <p class="empty-state">No emails to display. Click "Refresh Emails" to fetch your inbox.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calendar Section -->
+                <section id="calendar" class="content-section">
+                    <h2>Calendar Events</h2>
+                    <div class="calendar-container">
+                        <div id="calendar-events-container">
+                            <p class="empty-state">No calendar events detected. Events will appear here when detected in your emails.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="content-section">
+                    <h2>Settings</h2>
+                    <div class="settings-container">
+                        <div class="settings-card">
+                            <h3>Email Preferences</h3>
+                            <form id="email-preferences-form">
+                                <div class="form-group">
+                                    <label for="fetch-interval">Email Fetch Interval (minutes):</label>
+                                    <input type="number" id="fetch-interval" min="5" max="60" value="15">
+                                </div>
+                                <div class="form-group">
+                                    <label for="max-emails">Maximum Emails to Fetch:</label>
+                                    <input type="number" id="max-emails" min="10" max="100" value="50">
+                                </div>
+                                <div class="form-group">
+                                    <label>Digest Frequency:</label>
+                                    <div class="radio-group">
+                                        <input type="radio" id="digest-daily" name="digest-frequency" value="daily" checked>
+                                        <label for="digest-daily">Daily</label>
+                                        <input type="radio" id="digest-hourly" name="digest-frequency" value="hourly">
+                                        <label for="digest-hourly">Hourly</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="button primary">Save Preferences</button>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Priority Keywords</h3>
+                            <form id="priority-keywords-form">
+                                <div class="form-group">
+                                    <label for="high-priority-keywords">High Priority Keywords:</label>
+                                    <textarea id="high-priority-keywords" rows="3">urgent, important, asap, deadline, critical, emergency</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="medium-priority-keywords">Medium Priority Keywords:</label>
+                                    <textarea id="medium-priority-keywords" rows="3">review, update, meeting, schedule, tomorrow</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="low-priority-keywords">Low Priority Keywords:</label>
+                                    <textarea id="low-priority-keywords" rows="3">newsletter, subscription, promotion, sale</textarea>
+                                </div>
+                                <button type="submit" class="button primary">Save Keywords</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Email Detail Modal -->
+        <div id="email-detail-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="email-detail-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

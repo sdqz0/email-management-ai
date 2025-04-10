@@ -1,0 +1,41 @@
+Build an autonomous AI agent that connects to my email inbox and performs the following tasks:
+
+Email Retrieval & Categorization:
+
+Automatically fetch all incoming emails from the inbox.
+
+Analyze the content of each email and determine its priority level (e.g., high, medium, low) based on keywords, sender importance, urgency, or calendar mentions.
+
+Summarization:
+
+Provide a short, human-readable summary of each email so that I can understand the context at a glance.
+
+Action Suggestions & Scheduling:
+
+Detect if the email contains meeting invitations, deadlines, or appointments.
+
+If so, propose a corresponding calendar event (with title, date/time, and participants).
+
+Inbox Digest Report:
+
+Generate a daily or hourly digest listing:
+
+Top 5 most important emails (with summaries).
+
+Any proposed calendar entries.
+
+Unread emails that might require immediate attention.
+
+User Interface:
+
+Present results in a chat-like interface or a simple dashboard.
+
+Allow me to accept, ignore, or reply to messages directly from the summary.
+
+Optional Ideas to Improve:
+
+Automatically group similar emails (e.g., newsletters, reports, reminders).
+
+Suggest draft replies for common messages (e.g., meeting confirmations, thank-you notes).
+
+Detect spam or irrelevant content and filter it out automatically.

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Management AI Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Email Management AI Agent</h1>
+            <p>Connect to your Gmail account to get started</p>
+        </header>
+
+        <main>
+            <div class="auth-container">
+                <div class="card">
+                    <h2>Connect to Gmail</h2>
+                    <p>This application needs access to your Gmail account to retrieve and analyze your emails.</p>
+                    
+                    <div class="setup-steps">
+                        <h3>Setup Instructions:</h3>
+                        <ol>
+                            <li>
+                                <p>Create a Google Cloud project and enable the Gmail API:</p>
+                                <a href="https://console.cloud.google.com/apis/library/gmail.googleapis.com" target="_blank" class="button secondary">Enable Gmail API</a>
+                            </li>
+                            <li>
+                                <p>Configure OAuth consent screen and create OAuth credentials:</p>
+                                <a href="https://console.cloud.google.com/apis/credentials" target="_blank" class="button secondary">Create Credentials</a>
+                            </li>
+                            <li>
+                                <p>Download the credentials.json file and upload it here:</p>
+                                <form id="credentials-form" action="/upload_credentials" method="post" enctype="multipart/form-data">
+                                    <div class="file-upload">
+                                        <input type="file" name="credentials_file" id="credentials_file" accept=".json">
+                                        <label for="credentials_file">Choose credentials.json</label>
+                                    </div>
+                                    <button type="submit" class="button primary">Upload Credentials</button>
+                                </form>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="auth-actions">
+                        <a href="/auth" class="button primary">Authenticate with Gmail</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Email Management AI Agent</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
